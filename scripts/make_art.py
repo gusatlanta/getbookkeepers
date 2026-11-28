@@ -54,10 +54,10 @@ def logo() -> None:
     mark = f'<image href="data:image/png;base64,{SF_MARK_B64}" x="0" y="2" width="50" height="60"/>'
     body = (
         f"<title>GetBookkeepers, a Staff Financial Group service</title>{mark}"
-        f'<text x="62" y="40" font-family="Outfit, Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="{NAVY}">GetBookkeepers</text>'
+        f'<text x="62" y="40" font-family="Outfit, Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="{NAVY}">GetBookkeepers.com</text>'
         f'<text x="63" y="58" font-family="Inter, Arial, sans-serif" font-size="11" letter-spacing="1.5" fill="#5b6678">STAFF FINANCIAL GROUP</text>'
     )
-    write_svg("logo.svg", body, 330, 64)
+    write_svg("logo.svg", body, 410, 64)
     (STATIC / "favicon.svg").write_text(
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><image href="data:image/png;base64,{SF_MARK_B64}" x="6" y="0" width="54" height="64"/></svg>\n'
     )

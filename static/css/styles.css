@@ -40,7 +40,7 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--ink); line-height: 1.2;
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex-shrink: 0; }
 .brand img { width: 34px; height: auto; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-name { font-family: var(--font-head); font-weight: 600; font-size: 1.35rem; color: var(--gray-dark, #4a4950); letter-spacing: -.01em; }
+.brand-name { font-family: var(--font-head); font-weight: 600; font-size: 1.35rem; color: var(--gray-dark, #4a4950); letter-spacing: -.01em; white-space: nowrap; }
 .brand-tag { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-top: .25rem; border-top: 1px solid var(--line); padding-top: .2rem; }
 .nav { display: flex; gap: .2rem; margin-left: auto; align-items: center; }
 .nav-item { position: relative; }
