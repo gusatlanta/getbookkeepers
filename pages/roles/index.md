@@ -7,15 +7,18 @@ path: /roles/
 kicker: Bookkeeper roles
 crumb: Bookkeeper roles
 kind: hub
+h1_accent: role
+profiles_heading: Blinded profiles across bookkeeping roles
 image: roles.svg
 image_alt: Four bookkeeping and accounting roles side by side
 og: Which bookkeeping role do you need?
 date: 2026-11-22
-related_heading: Role guides
-related: /roles/accounts-payable-and-receivable-clerks/, /roles/full-charge-bookkeeper/, /roles/payroll-specialist/, /roles/staff-accountant/
+anchor: Which bookkeeping role to hire
 ---
 
 ## The four roles at a glance
+
+<div class="salary-data" markdown="1">
 
 | Role | Owns | Hire when | Median desired base* |
 |---|---|---|---|
@@ -24,7 +27,9 @@ related: /roles/accounts-payable-and-receivable-clerks/, /roles/full-charge-book
 | [Payroll specialist](/roles/payroll-specialist/) | Accurate, on-time payroll, tax filings, and records | Headcount, states, or pay complexity outgrew a side task | $70K (payroll) |
 | [Staff accountant](/roles/staff-accountant/) | Journal entries, reconciliations, and closes under GAAP | You need accrual accounting, reporting, and audit support | $70K (staff accountant) |
 
-*Median desired base salary from Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), 805 candidates, January to October 2026. These are what candidates asked for, not offers.
+*Median desired base salary from Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), 805 candidates, January to October 2026. These are what candidates asked for, not offers. Full numbers: [bookkeeper salary breakdown](/bookkeeper-salary/).
+
+</div>
 
 ## How to pick the right level
 

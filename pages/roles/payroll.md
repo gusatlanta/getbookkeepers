@@ -11,8 +11,12 @@ image: payroll-specialist.svg
 image_alt: A pay stub and a payroll calendar
 og: Hire a payroll specialist
 date: 2026-11-22
-related_heading: Other bookkeeper roles
-related: /roles/full-charge-bookkeeper/, /roles/accounts-payable-and-receivable-clerks/, /roles/staff-accountant/
+anchor: Hiring a payroll specialist
+services: /temp-contract-bookkeepers/, /direct-hire-bookkeepers/, /payrolling/
+order: 3
+h1_accent: payroll specialist
+profiles: payroll specialist|payroll administrator|payroll
+profiles_heading: Blinded payroll profiles in our database
 ---
 
 ## What a payroll specialist owns
@@ -54,7 +58,9 @@ related: /roles/full-charge-bookkeeper/, /roles/accounts-payable-and-receivable-
 
 ## Pay context
 
-In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for payroll roles was $70K (805 candidates, January to October 2026). Multistate payroll, union rules, and supervising others all move the number.
+<div class="salary-data" markdown="1">
+In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for payroll roles was $70K (805 candidates, January to October 2026). Multistate payroll, union rules, and supervising others all move the number. See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## Frequently asked questions
 

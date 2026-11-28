@@ -11,8 +11,12 @@ image: ap-ar.svg
 image_alt: Payables and receivables lines being cleared
 og: Hire an AP or AR clerk
 date: 2026-11-22
-related_heading: Other bookkeeper roles
-related: /roles/full-charge-bookkeeper/, /roles/payroll-specialist/, /roles/staff-accountant/
+anchor: Hiring an AP or AR clerk
+services: /temp-contract-bookkeepers/, /temp-to-hire-bookkeepers/, /direct-hire-bookkeepers/
+order: 1
+h1_accent: accounts receivable clerk
+profiles: accounts payable|billing specialist|accounts receivable specialist
+profiles_heading: Blinded AP and AR profiles in our database
 ---
 
 ## What an AP clerk does
@@ -62,7 +66,9 @@ Smaller companies often combine both into one AP and AR clerk, or fold them into
 
 ## Pay context
 
-In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for AP, AR, and billing roles was $67K (805 candidates, January to October 2026).
+<div class="salary-data" markdown="1">
+In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for AP, AR, and billing roles was $67K (805 candidates, January to October 2026). See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## Frequently asked questions
 

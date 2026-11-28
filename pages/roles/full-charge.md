@@ -11,8 +11,12 @@ image: full-charge.svg
 image_alt: A fully reconciled ledger closed for the month
 og: Hire a full-charge bookkeeper
 date: 2026-11-22
-related_heading: Other bookkeeper roles
-related: /roles/accounts-payable-and-receivable-clerks/, /roles/payroll-specialist/, /roles/staff-accountant/
+anchor: Hiring a full-charge bookkeeper
+services: /direct-hire-bookkeepers/, /temp-to-hire-bookkeepers/, /temp-contract-bookkeepers/
+order: 2
+h1_accent: full-charge bookkeeper
+profiles: full charge bookkeeper|bookkeeper
+profiles_heading: Blinded bookkeeper profiles in our database
 ---
 
 ## What "full-charge" means
@@ -64,7 +68,9 @@ Every resume Staff Financial Group sends comes with the candidate's answers to y
 
 ## Pay context
 
-In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for bookkeepers was $70K (805 candidates, January to October 2026). Full-charge experience, payroll, and multiple entities all push that number around, so share your scope with your recruiter.
+<div class="salary-data" markdown="1">
+In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for bookkeepers was $70K (805 candidates, January to October 2026). Full-charge experience, payroll, and multiple entities all push that number around, so share your scope with your recruiter. See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## Frequently asked questions
 
