@@ -1,5 +1,5 @@
 ---
-title: Direct Hire Bookkeepers | GetBookkeepers
+title: Direct Hire Bookkeepers in Atlanta | GetBookkeepers
 description: Hire a bookkeeper onto your payroll. Staff Financial Group screens candidates for your books and backs each Direct Hire with a replacement guarantee.
 h1: Hire a Direct Hire bookkeeper
 lede: When you know the role and want someone on your team for the long run, a Direct Hire search finds bookkeepers who already do the work your books need, screened against your own questions.

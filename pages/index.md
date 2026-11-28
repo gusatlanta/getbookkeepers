@@ -1,5 +1,5 @@
 ---
-title: Hire a Bookkeeper Fast | GetBookkeepers
+title: Hire a Bookkeeper in Atlanta Fast | GetBookkeepers
 description: Hire a bookkeeper through Temp, Contract, Temp-to-Hire, Direct Hire, or Payrolling. Staff Financial Group sends a blinded shortlist in 48 to 72 hours.
 h1: Hire a bookkeeper who fits your books
 h1_accent: fits your books
