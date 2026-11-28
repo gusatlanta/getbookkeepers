@@ -1,6 +1,6 @@
 ---
 title: Hire a Temp or Contract Bookkeeper | GetBookkeepers
-description: Hire a temp or contract bookkeeper for month-end close, AP and payroll coverage, a backlog, or busy season. We payroll them weekly and send one invoice.
+description: Hire a temp or contract bookkeeper for month-end close, AP and payroll coverage, a backlog, or busy season. We payroll them weekly, one invoice.
 h1: Hire a temp or contract bookkeeper
 lede: Cover the books now without adding headcount. A temp or contract bookkeeper handles the close, the payables, or the backlog, and Staff Financial Group handles payroll, taxes, and compliance.
 path: /temp-contract-bookkeepers/
@@ -12,8 +12,10 @@ image: temp-contract.svg
 image_alt: A calendar of covered weeks next to a ledger
 og: Hire a temp or contract bookkeeper
 date: 2026-11-22
-related_heading: Other ways to hire a bookkeeper
-related: /temp-to-hire-bookkeepers/, /direct-hire-bookkeepers/, /payrolling/
+anchor: Hire a temp or contract bookkeeper
+roles: /roles/full-charge-bookkeeper/, /roles/accounts-payable-and-receivable-clerks/, /roles/payroll-specialist/
+order: 1
+h1_accent: temp or contract
 ---
 
 ## When a temp or contract bookkeeper is the right call
@@ -40,7 +42,7 @@ Temp usually means a short assignment with a known end date. Contract usually me
 | You get | We handle |
 |---|---|
 | A bookkeeper doing your work, on your schedule | Weekly payroll |
-| One invoice at your agreed bill rate | Federal, state, and FICA withholdings |
+| One weekly invoice | Federal, state, and FICA withholdings |
 | No added HR paperwork | Workers comp and insurance under our policy |
 | The option to hire them later | W-2 at year-end |
 

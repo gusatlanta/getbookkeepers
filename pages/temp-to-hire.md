@@ -12,8 +12,10 @@ image: temp-to-hire.svg
 image_alt: Weeks of a trial period followed by a conversion to employee
 og: Temp-to-Hire bookkeepers
 date: 2026-11-22
-related_heading: Other ways to hire a bookkeeper
-related: /temp-contract-bookkeepers/, /direct-hire-bookkeepers/, /payrolling/
+anchor: Temp-to-Hire bookkeepers: try before you hire
+roles: /roles/full-charge-bookkeeper/, /roles/staff-accountant/, /roles/accounts-payable-and-receivable-clerks/
+order: 2
+h1_accent: Temp-to-Hire
 ---
 
 ## Why Temp-to-Hire works well for bookkeepers
@@ -31,7 +33,7 @@ It is a good fit when:
 
 1. **Send the job.** On the Get Started form, choose "Contract-to-Hire" as the hire type.
 2. **Screen and interview.** We build a screening questionnaire with you, and every resume comes with the candidate's answers. Say on the form that you plan to convert, so the screening covers whether each candidate wants a Direct Hire role.
-3. **Contract period.** The bookkeeper works for you while Staff Financial Group is the Employer of Record: weekly payroll, tax withholdings, workers comp, and one invoice at your agreed bill rate.
+3. **Contract period.** The bookkeeper works for you while Staff Financial Group is the Employer of Record: weekly payroll, tax withholdings, workers comp, and one invoice to you.
 4. **Convert.** When you are ready, you bring the bookkeeper onto your payroll with a simple conversion agreement.
 
 ## Make the trial period count
@@ -55,7 +57,7 @@ You sign a simple conversion agreement with Staff Financial Group, and the bookk
 
 ### Who pays the bookkeeper during the trial?
 
-Staff Financial Group does, as the Employer of Record. It runs weekly payroll and tax withholdings, and you pay one invoice at your agreed bill rate.
+Staff Financial Group does, as the Employer of Record. It runs weekly payroll and tax withholdings, and you receive one invoice.
 
 ### What if I decide not to convert?
 

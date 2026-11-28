@@ -1,6 +1,6 @@
 ---
 title: Hire a Staff Accountant | GetBookkeepers
-description: Hire a staff accountant for accrual entries, reconciliations, GAAP closes, and audit support. How the role differs from a bookkeeper and what to screen for.
+description: Hire a staff accountant for accruals, reconciliations, GAAP closes, and audit support. How the role differs from a bookkeeper and what to screen for.
 h1: Hire a staff accountant
 lede: When your lender, investors, or auditors need more than cash-basis books, a staff accountant brings accrual accounting, tighter reconciliations, and a repeatable close.
 path: /roles/staff-accountant/
@@ -11,8 +11,12 @@ image: staff-accountant.svg
 image_alt: A ledger and a small report chart
 og: Hire a staff accountant
 date: 2026-11-22
-related_heading: Other bookkeeper roles
-related: /roles/full-charge-bookkeeper/, /roles/accounts-payable-and-receivable-clerks/, /roles/payroll-specialist/
+anchor: Hiring a staff accountant
+services: /direct-hire-bookkeepers/, /temp-contract-bookkeepers/, /temp-to-hire-bookkeepers/
+order: 4
+h1_accent: staff accountant
+profiles: staff accountant
+profiles_heading: Blinded staff accountant profiles in our database
 ---
 
 ## Bookkeeper or staff accountant?
@@ -62,7 +66,9 @@ Every resume Staff Financial Group sends comes with the candidate's answers, so 
 
 ## Pay context
 
-In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for staff accountants was $70K, and $95K for senior accountants (805 candidates, January to October 2026).
+<div class="salary-data" markdown="1">
+In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary for staff accountants was $70K, and $95K for senior accountants (805 candidates, January to October 2026). See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## Frequently asked questions
 
