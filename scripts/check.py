@@ -7,12 +7,129 @@ import json
 import re
 import subprocess
 import sys
+import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
 
 DIST = Path(__file__).resolve().parent.parent / "dist"
 SITE = "https://www.getbookkeepers.com"
+PAGES = DIST.parent / "pages"
+MAX_DESC = 150
+# Gus: no bill rates, fees, or pricing anywhere. Salary figures from the 2026 Salary Guide ($67K style) are allowed.
+PRICING = [
+    (r"\$\s?\d[\d,.]*", "dollar amount outside a salary or pay context"),
+    (r"\bbill(ing)? rates? (of|is|are|from|start)", "bill rate amount"), (r"\b(per|an|/)\s?(hour|hr)\b", "hourly price"),
+    (r"\bhourly rate", "hourly rate"), (r"\b(placement|flat|direct hire|search|conversion|finder'?s?) fees?\b", "fee"),
+    (r"\bfees? (of|is|are|starts?)\b", "fee"), (r"\bmark-?ups?\b", "markup"), (r"\bpric(e|es|ed|ing)\b", "pricing"),
+    (r"\bhiresmart\b", "HireSmart pricing"), (r"\bmembership\b", "membership pricing"),
+    (r"\d+\s?%\s?(fee|of (the )?(first|annual|base|starting)|of (their|the candidate'?s) (salary|pay))", "percentage fee"),
+    (r"\bquote[ds]?\b", "quotes"), (r"\bcost[s]? (of|to) (hire|hiring|a search|the search)", "cost of hiring"),
+]
+# Internal-link rules by page kind: "/path/" = that page, "*kind" = every page of that kind, "1kind" = at least one.
+LINK_RULES = {
+    "role": ["/roles/", "*role", "1service", "/atlanta/", "/faq/"],
+    "service": ["1role", "*service", "/atlanta/", "/faq/"],
+    "local": ["*service", "*role"],
+    "faq": ["*service", "*role"],
+    "page": ["*role"],
+}
+
+
+def front_matter() -> dict[str, str]:
+    kinds = {}
+    for md in PAGES.rglob("*.md"):
+        fm = md.read_text().split("---", 2)[1]
+        meta = dict(re.findall(r"^(\w+):\s*(.+)$", fm, re.M))
+        kinds[meta["path"]] = meta["kind"]
+    return kinds
+
+
+def main_links(text: str) -> set[str]:
+    main = text.split('<main id="main">', 1)[-1].split("</main>", 1)[0]
+    out = set()
+    for h in re.findall(r'href="([^"]+)"', main):
+        if h.startswith(SITE):
+            h = h[len(SITE):] or "/"
+        if h.startswith("/"):
+            out.add(h.split("#")[0])
+    return out
+
+
+def visible_text(text: str) -> str:
+    import html as _h
+    t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", text, flags=re.S)
+    return _h.unescape(re.sub(r"<[^>]+>", " ", t)) + " " + " ".join(_h.unescape(c) for c in re.findall(r'content="([^"]*)"', text))
+
+
+def pricing_hits(vis: str) -> list[str]:
+    hits = []
+    for pat, why in PRICING:
+        for m in re.finditer(pat, vis, flags=re.I):
+            if why.startswith("dollar"):
+                if vis[m.end():m.end() + 2].lstrip().startswith("K"):
+                    continue  # $67K style: salary figures from the Salary Guide
+                if re.search(r"salary|salaries|\bpay\b|paid|\bask|median|BLS|wage", vis[max(0, m.start() - 250):m.end() + 250], re.I):
+                    continue
+            hits.append(f"pricing guard ({why}): ...{' '.join(vis[max(0, m.start() - 40):m.end() + 40].split())}...")
+    return hits
+
+
+def site_checks() -> list[str]:
+    errors = []
+    kinds = front_matter()
+    by_kind: dict[str, list[str]] = {}
+    for path, k in kinds.items():
+        by_kind.setdefault(k, []).append(path)
+    links, inbound = {}, {p: 0 for p in kinds}
+    for path in kinds:
+        text = (DIST / path.lstrip("/") / "index.html").read_text()
+        links[path] = main_links(text)
+        for t in links[path]:
+            if t in inbound and t != path:
+                inbound[t] += 1
+        desc = re.search(r'<meta name="description" content="([^"]*)"', text).group(1)
+        if len(desc) > MAX_DESC:
+            errors.append(f"{path}: description {len(desc)} chars")
+        errors += [f"{path}: {h}" for h in pricing_hits(visible_text(text))]
+        if kinds[path] == "page":
+            ctas = re.findall(r'<a[^>]*data-cta="[^"]*"[^>]*>', text)
+            targets = {re.search(r'href="([^"]+)"', c).group(1) for c in ctas}
+            if targets != {"https://100xjobs.com/"}:
+                errors.append(f"{path}: job seeker CTA targets {targets}")
+    errors += [f"llms.txt: {h}" for h in pricing_hits((DIST / "llms.txt").read_text())]
+    for path, n in inbound.items():
+        if path != "/" and n == 0:
+            errors.append(f"orphan page (no in-content links to it): {path}")
+    for path, k in kinds.items():
+        for rule in LINK_RULES.get(k, []):
+            if rule.startswith("/"):
+                missing = [rule] if rule != path and rule not in links[path] else []
+            elif rule.startswith("*"):
+                missing = [x for x in by_kind.get(rule[1:], []) if x != path and x not in links[path]]
+            else:
+                missing = [] if any(x in links[path] for x in by_kind.get(rule[1:], [])) else [f"at least one {rule[1:]}"]
+            errors += [f"{path} ({k}): missing internal link to {m}" for m in missing]
+    total = sum(len(v) for v in links.values())
+    print(f"in-content internal links: {total} unique across {len(links)} pages; orphans, link rules, descriptions, pricing guard checked")
+    return errors
+
+
+def profile_feed_check() -> list[str]:
+    js = (DIST / "js" / "profiles.js").read_text()
+    api = re.search(r"var API = '([^']+)'", js).group(1)
+    errs, n = [], 0
+    for q in ("bookkeeper", "accounts payable", "payroll", "staff accountant"):
+        url = api + "?" + urllib.parse.urlencode({"q": q, "keywords": q, "page": 1, "metro": "atlanta", "af": "1"})
+        try:
+            out = subprocess.run(["curl", "-s", "-m", "30", "-A", "Mozilla/5.0", url], capture_output=True, text=True).stdout
+            n += sum(1 for r in json.loads(out).get("results", []) if r.get("resume_url"))
+        except Exception as e:
+            errs.append(f"profile feed error for {q}: {e}")
+    print(f"  profile feed: {n} blinded profiles with resume links across 4 queries")
+    if n < 3:
+        errs.append("profile feed returned fewer than 3 profiles (carousel will stay hidden)")
+    return errs
 
 
 class P(HTMLParser):
@@ -110,8 +227,10 @@ def main() -> int:
     for loc in re.findall(r"<loc>(.*?)</loc>", sm):
         if not resolve(loc, "/").exists():
             errors.append(f"sitemap entry missing: {loc}")
+    errors += site_checks()
     print(f"{len(pages)} html files, {len(re.findall('<loc>', sm))} sitemap urls, {len(external)} external links")
     if "--external" in sys.argv:
+        errors += profile_feed_check()
         for u in sorted(external):
             if "fonts.g" in u:
                 continue
