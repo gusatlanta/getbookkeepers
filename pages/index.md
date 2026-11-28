@@ -2,6 +2,7 @@
 title: Hire a Bookkeeper Fast | GetBookkeepers
 description: Hire a bookkeeper through Temp, Contract, Temp-to-Hire, Direct Hire, or Payrolling. Staff Financial Group sends a blinded shortlist in 48 to 72 hours.
 h1: Hire a bookkeeper who fits your books
+h1_accent: fits your books
 lede: Temp, Contract, Temp-to-Hire, Direct Hire, or Payrolling. Tell us what your books need, and a finance and accounting recruiting firm in metro Atlanta since 2005 sends you screened candidates in 48 to 72 hours.
 path: /
 kicker: Bookkeepers for growing businesses
@@ -11,8 +12,7 @@ image: home.svg
 image_alt: A bookkeeping ledger with reviewed lines next to a new hire
 og: Hire a bookkeeper who fits your books
 date: 2026-11-22
-related_heading: Bookkeeper roles we fill
-related: /roles/accounts-payable-and-receivable-clerks/, /roles/full-charge-bookkeeper/, /roles/payroll-specialist/, /roles/staff-accountant/
+anchor: Hire a bookkeeper with Staff Financial Group
 ---
 
 ## Why a bookkeeping hire is worth doing right
@@ -28,10 +28,10 @@ Your bookkeeper touches every dollar that comes in and goes out. A weak hire sho
 <li><strong>You interview, we handle the rest.</strong> We coordinate interviews and offers. For Temp, Contract, and Payrolling, we onboard the bookkeeper and handle payroll and compliance.</li>
 </ol>
 
-## Five ways to hire a bookkeeper
+## Ways to hire a bookkeeper
 
-<div class="cards">
-<a class="card card-link" href="/temp-contract-bookkeepers/"><span class="card-kicker">Temp and Contract</span><strong>Cover the work now</strong><span>Month-end close, a backlog, a leave, or busy season. We are the Employer of Record and send one invoice.</span></a>
+<div class="cards" id="ways-to-hire">
+<a class="card card-link" href="/temp-contract-bookkeepers/"><span class="card-kicker">Temp and Contract</span><strong>Cover the work now</strong><span>Month-end close, a backlog, a leave, or busy season. We are the Employer of Record.</span></a>
 <a class="card card-link" href="/temp-to-hire-bookkeepers/"><span class="card-kicker">Temp-to-Hire</span><strong>See the work first</strong><span>Start on contract, then convert the bookkeeper to your payroll with a simple conversion agreement.</span></a>
 <a class="card card-link" href="/direct-hire-bookkeepers/"><span class="card-kicker">Direct Hire</span><strong>Hire onto your team</strong><span>Recruited and screened for your books, backed by our replacement guarantee.</span></a>
 <a class="card card-link" href="/payrolling/"><span class="card-kicker">Payrolling</span><strong>You found them, we payroll them</strong><span>Already picked your bookkeeper? We employ them, run weekly payroll, and handle taxes and the W-2.</span></a>
@@ -39,17 +39,21 @@ Your bookkeeper touches every dollar that comes in and goes out. A weak hire sho
 
 Not sure which one fits? Pick "Not sure yet" on the form. A recruiter will walk through the tradeoffs with you, and the [FAQ](/faq/) covers the most common questions.
 
-## How you pay
+## What we handle for Temp, Contract, and Payrolling
 
-| Hire type | How billing works |
-|---|---|
-| Temp, Contract, Temp-to-Hire | One bill rate for the hours worked. We payroll the bookkeeper every week and send one invoice at your agreed bill rate. |
-| Payrolling | One bill rate. We act as Employer of Record for a worker you already chose. |
-| Direct Hire | One fee, quoted up front before the search starts. Backed by our replacement guarantee. |
+When Staff Financial Group is the Employer of Record, the bookkeeper works for you and we handle the employment side:
 
-<div class="placeholder">PLACEHOLDER for Gus: typical bookkeeper bill rate range and Direct Hire fee, so prices are visible on the page.</div>
+- **Weekly payroll** for the bookkeeper.
+- **Tax withholdings:** federal, state, and FICA.
+- **Workers comp and insurance** under Staff Financial Group's policy.
+- **W-2** at year-end.
+- **One invoice** to you, instead of a new employee on your own payroll.
 
-Want salary context first? Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html) shows what accounting people are asking to be paid. The median desired base for bookkeepers was $70K, from 805 candidates between January and October 2026.
+Direct Hire placements join your payroll from day one and are backed by Staff Financial Group's replacement guarantee.
+
+<div class="salary-data" markdown="1">
+**Pay context.** Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html) shows what accounting people are asking to be paid. The median desired base for bookkeepers was $70K, from 805 candidates between January and October 2026. See the full [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## What makes our shortlist different
 
@@ -75,7 +79,7 @@ Yes. Temp-to-Hire lets you see the work first. We are the Employer of Record dur
 
 ### Who handles payroll and taxes for a temp bookkeeper?
 
-We do. As Employer of Record, Staff Financial Group runs payroll every week, handles federal, state, and FICA withholdings, covers workers comp under its policy, and issues the W-2 at year-end. You get one invoice at your agreed bill rate.
+We do. As Employer of Record, Staff Financial Group runs payroll every week, handles federal, state, and FICA withholdings, covers workers comp under its policy, and issues the W-2 at year-end. You get one invoice.
 
 ### Do you only work in Atlanta?
 

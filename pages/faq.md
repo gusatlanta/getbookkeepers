@@ -1,5 +1,5 @@
 ---
-title: Bookkeeper Hiring FAQ: Cost, Timing, Types | GetBookkeepers
+title: Bookkeeper Hiring FAQ: Timing, Types, Payroll | GetBookkeepers
 description: Common questions about hiring a bookkeeper through Staff Financial Group: timing, billing, Employer of Record, conversions, guarantees, and screening.
 h1: Bookkeeper hiring FAQ
 lede: Straight answers about how hiring a bookkeeper through GetBookkeepers and Staff Financial Group works, from the first form to the first day.
@@ -11,8 +11,8 @@ image: faq.svg
 image_alt: A question and an answer
 og: Bookkeeper hiring FAQ
 date: 2026-11-22
-related_heading: Ways to hire a bookkeeper
-related: /temp-contract-bookkeepers/, /temp-to-hire-bookkeepers/, /direct-hire-bookkeepers/, /payrolling/
+anchor: Bookkeeper hiring FAQ
+h1_accent: FAQ
 ---
 
 Can't find your question? Send it through the Get Started form, or call Staff Financial Group at 404-250-0790 or 678-777-5627.
@@ -41,19 +41,15 @@ Every candidate is invited to record an optional video intro, so you can see how
 
 ### What is the difference between Temp, Contract, Temp-to-Hire, and Direct Hire?
 
-Temp and Contract bookkeepers work for you while Staff Financial Group employs and payrolls them, for a short assignment or a longer engagement. Temp-to-Hire starts the same way, with the plan to convert the bookkeeper to your payroll. Direct Hire means the bookkeeper joins your payroll from day one, and you pay one fee.
+Temp and Contract bookkeepers work for you while Staff Financial Group employs and payrolls them, for a short assignment or a longer engagement. Temp-to-Hire starts the same way, with the plan to convert the bookkeeper to your payroll. Direct Hire means the bookkeeper joins your payroll from day one.
 
-### How does billing work for a temp or contract bookkeeper?
+### Who pays a temp or contract bookkeeper?
 
-Staff Financial Group payrolls the bookkeeper every week and sends you one invoice at your agreed bill rate.
-
-### How is a Direct Hire bookkeeper priced?
-
-One fee, quoted up front before the search starts.
+Staff Financial Group does. It payrolls the bookkeeper every week as Employer of Record and sends you one invoice.
 
 ### Is there a guarantee on Direct Hire placements?
 
-Yes. Every Direct Hire placement is backed by Staff Financial Group's replacement guarantee. If the person leaves within the guarantee period, we replace them at no additional fee.
+Yes. Every Direct Hire placement is backed by Staff Financial Group's replacement guarantee. If the person leaves within the guarantee period, we replace them.
 
 ### What does Employer of Record mean?
 
@@ -61,7 +57,7 @@ Staff Financial Group is the legal employer of temp, contract, and payrolled wor
 
 ### Can you payroll a bookkeeper I already found?
 
-Yes. That is Payrolling. Staff Financial Group employs the person you chose, and you pay one bill rate. See [Payrolling](/payrolling/).
+Yes. That is Payrolling. Staff Financial Group employs the person you chose and handles payroll, taxes, and the W-2. See [Payrolling](/payrolling/).
 
 ### Can I convert a temp bookkeeper to my own employee?
 

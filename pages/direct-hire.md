@@ -1,6 +1,6 @@
 ---
 title: Direct Hire Bookkeepers | GetBookkeepers
-description: Hire a bookkeeper onto your own payroll. Staff Financial Group screens candidates for your books and backs every Direct Hire with a replacement guarantee.
+description: Hire a bookkeeper onto your payroll. Staff Financial Group screens candidates for your books and backs each Direct Hire with a replacement guarantee.
 h1: Hire a Direct Hire bookkeeper
 lede: When you know the role and want someone on your team for the long run, a Direct Hire search finds bookkeepers who already do the work your books need, screened against your own questions.
 path: /direct-hire-bookkeepers/
@@ -12,19 +12,21 @@ image: direct-hire.svg
 image_alt: An employer and a Direct Hire bookkeeper
 og: Hire a Direct Hire bookkeeper
 date: 2026-11-22
-related_heading: Other ways to hire a bookkeeper
-related: /temp-to-hire-bookkeepers/, /temp-contract-bookkeepers/, /roles/
+anchor: Direct Hire bookkeeper search
+roles: /roles/full-charge-bookkeeper/, /roles/staff-accountant/, /roles/payroll-specialist/
+order: 3
+h1_accent: Direct Hire
 ---
 
 ## Direct Hire, explained
 
-In a Direct Hire search, the bookkeeper you choose joins your payroll as your own employee from day one. Staff Financial Group does the recruiting and screening, and you pay one fee, quoted up front before the search starts. Every Direct Hire placement is backed by Staff Financial Group's replacement guarantee: if the person leaves within the guarantee period, we replace them at no additional fee.
+In a Direct Hire search, the bookkeeper you choose joins your payroll as your own employee from day one. Staff Financial Group does the recruiting and screening, and every Direct Hire placement is backed by Staff Financial Group's replacement guarantee: if the person leaves within the guarantee period, we replace them.
 
 Direct Hire is the right choice when:
 
 - You know what the role needs and the workload is steady.
 - You want the bookkeeper to grow with the company, maybe into an accounting manager or controller seat later.
-- You would rather pay one fee than an hourly bill rate.
+- You want the bookkeeper fully on your team, with your benefits and your culture, from the first day.
 
 ## How a Direct Hire bookkeeper search works
 
@@ -48,17 +50,15 @@ See [bookkeeper roles](/roles/) for what to screen for by job, from AP and AR cl
 
 ## Set the salary with real numbers
 
-Offers get turned down when the pay is off. In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary was $70K for bookkeepers, $67K for AP, AR, and billing roles, and $70K for payroll roles, from 805 candidates between January and October 2026. Use it as a starting point and adjust for the scope of your role.
+<div class="salary-data" markdown="1">
+Offers get turned down when the pay is off. In Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html), the median desired base salary was $70K for bookkeepers, $67K for AP, AR, and billing roles, and $70K for payroll roles, from 805 candidates between January and October 2026. Use it as a starting point and adjust for the scope of your role. See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>
 
 ## Frequently asked questions
 
-### What does a Direct Hire bookkeeper search cost?
-
-One fee, quoted up front before the search starts, so you know the cost before you commit. Ask for a quote on the Get Started form.
-
 ### What is the replacement guarantee?
 
-Every Direct Hire placement is backed by Staff Financial Group's replacement guarantee. If the bookkeeper leaves within the guarantee period, we replace them at no additional fee.
+Every Direct Hire placement is backed by Staff Financial Group's replacement guarantee. If the bookkeeper leaves within the guarantee period, we replace them.
 
 ### How fast will I see candidates?
 
