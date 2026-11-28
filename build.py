@@ -32,9 +32,9 @@ JOBS_URL = "https://100xjobs.com/"
 GA_ID = ""
 FAQ_HEADING = "## Frequently asked questions"
 MAX_DESC = 150
-KINDS = {"home", "service", "hub", "role", "local", "area", "industry", "salary", "faq", "page"}
+KINDS = {"home", "service", "hub", "role", "local", "area", "city", "industry", "salary", "faq", "page"}
 # Pages that get Article schema (guides), matching how oneminuteinterviewtips marks up its guides.
-ARTICLE_KINDS = {"role", "local", "area", "industry", "salary"}
+ARTICLE_KINDS = {"role", "local", "area", "city", "industry", "salary"}
 ATLANTA, FAQ, ROLES_HUB, IND_HUB, SALARY, JOBS_PAGE = (
     "/atlanta/", "/faq/", "/roles/", "/industries/", "/bookkeeper-salary/", "/job-seekers/")
 DEFAULT_PROFILE_QUERIES = "bookkeeper|accounts payable|accounts receivable|payroll specialist|staff accountant"
@@ -126,6 +126,10 @@ def load_pages() -> list[dict]:
         pages.append({**meta, "body": main, "faqs": faqs, "date": dt.date.fromisoformat(meta["date"]),
                       "services": split_list(meta.get("services", "")), "roles": split_list(meta.get("roles", "")),
                       "order": int(meta.get("order", "50")), "og_image": f"og-{Path(meta['image']).stem}.png"})
+    by = {p["path"]: p for p in pages}
+    for p in pages:
+        if p["kind"] == "city" and p.get("area") in by:
+            p["area_crumb"] = by[p["area"]]["crumb"]
     return pages
 
 
@@ -165,11 +169,11 @@ def nav_html(page: dict, pages: list[dict]) -> str:
         links = "".join(f'<a href="{p["path"]}">{html.escape(p["crumb"])}</a>' for p in items)
         cur = ' aria-current="page"' if current else ""
         return (f'<div class="nav-item has-menu"><a class="nav-top" href="{href}"{cur}>{label}</a>'
-                f'<div class="nav-menu">{links}</div></div>')
+                f'<div class="nav-menu{" nav-menu-wide" if len(items) > 8 else ""}">{links}</div></div>')
 
     path, kind = page["path"], page.get("kind")
     areas = of_kind(pages, "area")
-    atl_items = [p for p in pages if p["path"] == ATLANTA] + areas
+    atl_items = [p for p in pages if p["path"] == ATLANTA] + areas + of_kind(pages, "city")
     return (
         menu("Ways to hire", "/#ways-to-hire", of_kind(pages, "service"), kind == "service")
         + menu("Roles", ROLES_HUB, of_kind(pages, "role"), path.startswith(ROLES_HUB))
@@ -254,6 +258,7 @@ def page_shell(page: dict, content: str, schema: list[dict], pages: list[dict], 
       {col("Roles", [(ROLES_HUB, "All bookkeeper roles")] + [(p["path"], p["crumb"]) for p in roles])}
       {col("Industries", [(IND_HUB, "All industries")] + [(p["path"], p["crumb"]) for p in inds])}
       {col("Atlanta", [(ATLANTA, "Metro Atlanta")] + [(p["path"], p["crumb"]) for p in areas] + [(SALARY, "Bookkeeper salary data"), (FAQ, "FAQ"), (JOBS_PAGE, "Bookkeeping jobs")])}
+      {col("Atlanta cities", [(p["path"], p["crumb"]) for p in of_kind(pages, "city")])}
     </div>
     <div class="wrap footer-base">Atlanta, GA &middot; &copy; {dt.date.today().year} Staff Financial Group. Powered by NorthPoint. All rights reserved. &middot; <a href="{TEMPS_URL}">Browse available talent</a> &middot; <a href="{SALARY_GUIDE_URL}">2026 Salary Guide</a></div>
   </footer>{scripts}
@@ -271,6 +276,10 @@ def crumb_trail(page: dict) -> list[tuple[str, str]]:
         trail.append((IND_HUB, "Industries"))
     elif page["kind"] == "area":
         trail.append((ATLANTA, "Atlanta"))
+    elif page["kind"] == "city":
+        trail.append((ATLANTA, "Atlanta"))
+        if page.get("area") and page["area"] != ATLANTA:
+            trail.append((page["area"], page["area_crumb"]))
     if p != "/":
         trail.append((p, page["crumb"]))
     return trail
@@ -303,6 +312,20 @@ def hero(page: dict) -> str:
         </div>
         <figure class="hero-art"><img src="/images/{page['image']}" alt="{html.escape(page.get('image_alt') or page['h1'])}" width="800" height="520"></figure>
       </div>
+    </section>"""
+
+
+TICKER_QUERIES = "bookkeeper|full charge bookkeeper|accounts payable|accounts receivable|payroll specialist|staff accountant|accountant|billing specialist"
+
+
+def ticker_html(page: dict) -> str:
+    """Auto-scrolling strip of real, blinded bookkeeping and accounting profiles from the same public feed as the carousel.
+    Sits right under the header on the home page and the roles pages. Hidden until at least 3 profiles load."""
+    if page["kind"] not in ("home", "role") and page["path"] != ROLES_HUB:
+        return ""
+    return f"""    <section class="ticker" data-queries="{TICKER_QUERIES}" aria-label="Blinded bookkeeping and accounting profiles available in metro Atlanta" hidden>
+      <div class="ticker-label"><a href="{TEMPS_URL}">Available now<span> in metro Atlanta</span></a></div>
+      <div class="ticker-window"><div class="ticker-rail"></div></div>
     </section>"""
 
 
@@ -352,15 +375,23 @@ def link_groups(page: dict, pages: list[dict]) -> list[tuple[str, list[str], boo
     if kind == "hub":
         return [("Industry guides", inds, True), ("Ways to hire a bookkeeper", services, True),
                 ("More", [ROLES_HUB, ATLANTA, SALARY, FAQ], False)]
+    cities = paths("city")
+    if kind == "city":
+        more = [x for x in [page.get("area"), ATLANTA, SALARY, IND_HUB, FAQ] if x]
+        return [(f"Nearby cities", split_list(page.get("nearby", "")), True),
+                (f"Ways to hire a bookkeeper in {page['city']}", services, True),
+                ("Bookkeeper roles", roles, False), ("More", list(dict.fromkeys(more)), False)]
     if kind == "local":
-        return [("Metro Atlanta areas", areas, True), ("Ways to hire a bookkeeper in Atlanta", services, True),
+        return [("Metro Atlanta areas", areas, True), ("Metro Atlanta cities", cities, True), ("Ways to hire a bookkeeper in Atlanta", services, True),
                 ("Bookkeeper roles we fill in Atlanta", roles, True), ("More", [SALARY, IND_HUB, FAQ], False)]
     if kind == "area":
-        return [("Other metro Atlanta areas", others(areas), True), ("Ways to hire a bookkeeper", services, True),
+        return [("Cities in this area", [p["path"] for p in of_kind(pages, "city") if p.get("area") == me], True),
+                ("Other metro Atlanta areas", others(areas), True), ("Ways to hire a bookkeeper", services, True),
                 ("Bookkeeper roles", roles, False), ("More", [ATLANTA, SALARY, IND_HUB, FAQ], False)]
     if kind == "industry":
         return [("Roles this industry hires most", page["roles"], True), ("Ways to hire", page["services"], True),
-                ("Other industry guides", others(inds), False), ("More", [IND_HUB, ATLANTA, SALARY, FAQ], False)]
+                ("Other industry guides", others(inds), False), ("Hire a bookkeeper near you in metro Atlanta", cities, False),
+                ("More", [IND_HUB, ATLANTA, SALARY, FAQ], False)]
     if kind == "salary":
         return [("Hire for these roles", roles, True), ("Ways to hire a bookkeeper", services, True),
                 ("More", [ATLANTA, IND_HUB, FAQ], False)]
@@ -426,7 +457,8 @@ def schema_for(page: dict, pages: list[dict]) -> list[dict]:
             {"@type": "ListItem", "position": i, "name": n, "item": SITE_URL + h} for i, (h, n) in enumerate(crumb_trail(page), 1)]})
     part_kind = {ROLES_HUB: "role", IND_HUB: "industry", ATLANTA: "area"}.get(page["path"])
     if part_kind:
-        web["hasPart"] = [{"@type": "Article", "headline": p["h1"], "url": SITE_URL + p["path"]} for p in of_kind(pages, part_kind)]
+        parts = of_kind(pages, part_kind) + (of_kind(pages, "city") if part_kind == "area" else [])
+        web["hasPart"] = [{"@type": "Article", "headline": p["h1"], "url": SITE_URL + p["path"]} for p in parts]
     graph.append(web)
     if page["kind"] in ARTICLE_KINDS:
         graph.append({"@type": "Article", "@id": f"{url}#article", "headline": page["h1"], "description": page["description"],
@@ -434,7 +466,16 @@ def schema_for(page: dict, pages: list[dict]) -> list[dict]:
                       "image": f"{SITE_URL}/images/{page['og_image']}", "author": {"@id": f"{SITE_URL}/#org"},
                       "publisher": {"@id": f"{SITE_URL}/#org"}, "mainEntityOfPage": {"@id": f"{url}#webpage"},
                       "inLanguage": "en-US"})
-    if page.get("service_type"):
+    if page["kind"] == "city":
+        graph.append({"@type": "Service", "@id": f"{url}#service", "name": page["h1"], "serviceType": page["service_type"],
+                      "description": page["description"], "provider": {"@id": f"{SITE_URL}/#org"}, "url": url,
+                      "areaServed": [{"@type": "City", "name": f"{page['city']}, Georgia"},
+                                     {"@type": "AdministrativeArea", "name": f"{page['county']}, Georgia"}],
+                      "audience": {"@type": "BusinessAudience", "audienceType": "Employers hiring bookkeepers"},
+                      "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Ways to hire", "itemListElement": [
+                          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": n}}
+                          for n in ("Temp and Contract", "Temp-to-Hire", "Direct Hire", "Payrolling")]}})
+    elif page.get("service_type"):
         graph.append({"@type": "Service", "@id": f"{url}#service", "name": page["h1"], "serviceType": page["service_type"],
                       "description": page["description"], "provider": {"@id": f"{SITE_URL}/#org"}, "url": url,
                       "areaServed": page.get("area_served") and [{"@type": "Place", "name": a} for a in split_list(page["area_served"])] or ORG["areaServed"]})
@@ -491,7 +532,7 @@ def llms_txt(pages: list[dict]) -> str:
              f"- Salary data: Staff Financial Group 2026 Salary Guide, {SALARY_GUIDE_URL}",
              f"- Main site: {SF_URL}", f"- Bookkeeping job seekers: 100X Jobs at {JOBS_URL}"]
     sections = [("Ways to hire", "service"), ("Role guides", "role"), ("Industry guides", "industry"),
-                ("Metro Atlanta", "local"), ("Metro Atlanta areas", "area")]
+                ("Metro Atlanta", "local"), ("Metro Atlanta areas", "area"), ("Metro Atlanta cities", "city")]
     listed = set()
     for title, kind in sections:
         lines += ["", f"## {title}"]
@@ -515,10 +556,12 @@ def build() -> int:
     problems: list[str] = []
     for page in pages:
         body_html = md(page["body"])
-        content = (hero(page) + "\n" + profiles_html(page)
+        content = (ticker_html(page) + "\n" + hero(page) + "\n" + profiles_html(page)
                    + f'\n    <div class="wrap content-grid"><article class="prose">{body_html}{faq_html(page["faqs"])}</article>{aside_html(page)}</div>\n'
                    + f'    <div class="wrap">{related_html(page, pages, by_path)}</div>\n' + cta_band(page))
         scripts = '\n  <script src="/js/profiles.js" defer></script>' if profiles_html(page) else ""
+        if ticker_html(page):
+            scripts += '\n  <script src="/js/ticker.js" defer></script>'
         out = page_shell(page, content, schema_for(page, pages), pages, scripts)
         problems += check_copy(page["path"], out)
         write(DIST_DIR / page["path"].lstrip("/") / "index.html", out)

@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import time
 import sys
 import urllib.parse
 import urllib.request
@@ -26,14 +27,22 @@ PRICING = [
     (r"\d+\s?%\s?(fee|of (the )?(first|annual|base|starting)|of (their|the candidate'?s) (salary|pay))", "percentage fee"),
     (r"\bquote[ds]?\b", "quotes"), (r"\bcost[s]? (of|to) (hire|hiring|a search|the search)", "cost of hiring"),
 ]
-# Internal-link rules by page kind: "/path/" = that page, "*kind" = every page of that kind, "1kind" = at least one.
+# Internal-link rules by page kind: "/path/" = that page, "*kind" = every page of that kind, "1kind" = at least one,
+# "^area" = the city's own area guide, "^nearby" = the city's nearby cities, "^cities" = every city in an area.
 LINK_RULES = {
     "role": ["/roles/", "*role", "1service", "/atlanta/", "/faq/"],
     "service": ["1role", "*service", "/atlanta/", "/faq/"],
-    "local": ["*service", "*role"],
+    "local": ["*service", "*role", "*area", "*city"],
+    "area": ["*service", "/atlanta/", "^cities"],
+    "city": ["/atlanta/", "^area", "^nearby", "*service", "1role", "/faq/", "/bookkeeper-salary/"],
+    "industry": ["/industries/", "1role", "1service", "/atlanta/", "1city"],
+    "hub": ["1service"],
     "faq": ["*service", "*role"],
     "page": ["*role"],
 }
+
+
+META: dict[str, dict] = {}
 
 
 def front_matter() -> dict[str, str]:
@@ -42,7 +51,17 @@ def front_matter() -> dict[str, str]:
         fm = md.read_text().split("---", 2)[1]
         meta = dict(re.findall(r"^(\w+):\s*(.+)$", fm, re.M))
         kinds[meta["path"]] = meta["kind"]
+        META[meta["path"]] = meta
     return kinds
+
+
+def rule_targets(rule: str, path: str) -> list[str]:
+    meta = META[path]
+    if rule == "^area":
+        return [meta["area"]]
+    if rule == "^nearby":
+        return [p.strip() for p in meta.get("nearby", "").split(",") if p.strip()]
+    return [p for p, m in META.items() if m["kind"] == "city" and m.get("area") == path]
 
 
 def main_links(text: str) -> set[str]:
@@ -92,6 +111,9 @@ def site_checks() -> list[str]:
         if len(desc) > MAX_DESC:
             errors.append(f"{path}: description {len(desc)} chars")
         errors += [f"{path}: {h}" for h in pricing_hits(visible_text(text))]
+        if kinds[path] in ("home", "role") or path == "/roles/":
+            if 'class="ticker"' not in text or "/js/ticker.js" not in text:
+                errors.append(f"{path}: missing the scrolling profile strip")
         if kinds[path] == "page":
             ctas = re.findall(r'<a[^>]*data-cta="[^"]*"[^>]*>', text)
             targets = {re.search(r'href="([^"]+)"', c).group(1) for c in ctas}
@@ -103,7 +125,9 @@ def site_checks() -> list[str]:
             errors.append(f"orphan page (no in-content links to it): {path}")
     for path, k in kinds.items():
         for rule in LINK_RULES.get(k, []):
-            if rule.startswith("/"):
+            if rule.startswith("^"):
+                missing = [x for x in rule_targets(rule, path) if x not in links[path]]
+            elif rule.startswith("/"):
                 missing = [rule] if rule != path and rule not in links[path] else []
             elif rule.startswith("*"):
                 missing = [x for x in by_kind.get(rule[1:], []) if x != path and x not in links[path]]
@@ -122,8 +146,12 @@ def profile_feed_check() -> list[str]:
     for q in ("bookkeeper", "accounts payable", "payroll", "staff accountant"):
         url = api + "?" + urllib.parse.urlencode({"q": q, "keywords": q, "page": 1, "metro": "atlanta", "af": "1"})
         try:
-            out = subprocess.run(["curl", "-s", "-m", "30", "-A", "Mozilla/5.0", url], capture_output=True, text=True).stdout
-            n += sum(1 for r in json.loads(out).get("results", []) if r.get("resume_url"))
+            for _ in range(8):  # the feed answers {"warming": true} with no results while its cache fills
+                data = json.loads(subprocess.run(["curl", "-s", "-m", "30", "-A", "Mozilla/5.0", url], capture_output=True, text=True).stdout)
+                if not data.get("warming") or data.get("results"):
+                    break
+                time.sleep(10)
+            n += sum(1 for r in data.get("results", []) if r.get("resume_url"))
         except Exception as e:
             errs.append(f"profile feed error for {q}: {e}")
     print(f"  profile feed: {n} blinded profiles with resume links across 4 queries")
