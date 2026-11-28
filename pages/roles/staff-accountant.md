@@ -1,5 +1,5 @@
 ---
-title: Hire a Staff Accountant | GetBookkeepers
+title: Hire a Staff Accountant in Atlanta | GetBookkeepers
 description: Hire a staff accountant for accruals, reconciliations, GAAP closes, and audit support. How the role differs from a bookkeeper and what to screen for.
 h1: Hire a staff accountant
 lede: When your lender, investors, or auditors need more than cash-basis books, a staff accountant brings accrual accounting, tighter reconciliations, and a repeatable close.

@@ -1,5 +1,5 @@
 ---
-title: Temp-to-Hire Bookkeepers | GetBookkeepers
+title: Temp-to-Hire Bookkeepers in Atlanta | GetBookkeepers
 description: Start a bookkeeper on contract, watch a full close, then convert them to your payroll with a simple conversion agreement. We payroll them meanwhile.
 h1: Temp-to-Hire bookkeepers
 lede: See a bookkeeper work in your books before you make the offer. They start on our payroll, and when you are sure, you convert them to yours with a simple conversion agreement.

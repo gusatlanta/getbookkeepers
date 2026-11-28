@@ -1,5 +1,5 @@
 ---
-title: Hire a Payroll Specialist | GetBookkeepers
+title: Hire a Payroll Specialist in Atlanta | GetBookkeepers
 description: Hire a payroll specialist who gets every paycheck and tax filing right. What payroll specialists own, red flags, screening questions, and pay context.
 h1: Hire a payroll specialist
 lede: Payroll is the one accounting job every employee checks. A payroll specialist makes sure people are paid correctly and on time, and that the tax filings behind each paycheck are right.

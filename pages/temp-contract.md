@@ -1,5 +1,5 @@
 ---
-title: Hire a Temp or Contract Bookkeeper | GetBookkeepers
+title: Temp and Contract Bookkeepers in Atlanta | GetBookkeepers
 description: Hire a temp or contract bookkeeper for month-end close, AP and payroll coverage, a backlog, or busy season. We payroll them weekly, one invoice.
 h1: Hire a temp or contract bookkeeper
 lede: Cover the books now without adding headcount. A temp or contract bookkeeper handles the close, the payables, or the backlog, and Staff Financial Group handles payroll, taxes, and compliance.
