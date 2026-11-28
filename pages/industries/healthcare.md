@@ -1,11 +1,11 @@
 ---
-title: Hiring Bookkeepers for Medical Practices | GetBookkeepers
+title: Medical Practice Bookkeepers in Atlanta | GetBookkeepers
 description: What a medical practice bookkeeper does: insurance and patient receivables, payment posting, contractual adjustments, and privacy. What to screen for.
 h1: Hiring bookkeepers for medical practices and healthcare
 h1_accent: medical practices and healthcare
 lede: Healthcare bookkeeping is mostly about receivables: money owed by insurers and patients, posted correctly and followed up. Here is what to look for in a practice bookkeeper.
 path: /industries/healthcare/
-kicker: Industry guide
+kicker: Atlanta industry guide
 crumb: Healthcare
 kind: industry
 order: 3
@@ -36,7 +36,7 @@ Patient payment and billing records are protected health information under HIPAA
 
 ## Where these jobs are in metro Atlanta
 
-Staff Financial Group's local pages describe healthcare finance hiring near Holcomb Bridge Road in Roswell (physician practice accounting, patient billing oversight, and revenue cycle), around the Johns Creek hospital campus, and along Peachtree Dunwoody Road in Sandy Springs, the hospital cluster known as Pill Hill. Cumming adds dental and veterinary groups. See the [North Fulton and Forsyth](/atlanta/north-fulton-forsyth/) and [Buckhead, Midtown, and Sandy Springs](/atlanta/buckhead-midtown-sandy-springs/) area guides.
+Staff Financial Group's local pages describe healthcare finance hiring near Holcomb Bridge Road in [Roswell](/atlanta/roswell-ga/) (physician practice accounting, patient billing oversight, and revenue cycle), around the [Johns Creek](/atlanta/johns-creek-ga/) hospital campus, and along Peachtree Dunwoody Road in [Sandy Springs](/atlanta/sandy-springs-ga/), the hospital cluster known as Pill Hill. Cumming adds dental and veterinary groups. See the [North Fulton and Forsyth](/atlanta/north-fulton-forsyth/) and [Buckhead, Midtown, and Sandy Springs](/atlanta/buckhead-midtown-sandy-springs/) area guides.
 
 ## Skills to screen for
 
@@ -56,7 +56,7 @@ Staff Financial Group's local pages describe healthcare finance hiring near Holc
 
 ### Can a contract bookkeeper help during a practice acquisition or system change?
 
-Yes. Staff Financial Group's Roswell page notes contract help is common for practice acquisitions, system changes, and year-end catch-up.
+Yes. Staff Financial Group's [Roswell page](/atlanta/roswell-ga/) notes contract help is common for practice acquisitions, system changes, and year-end catch-up.
 
 ### Do I need a healthcare-specific bookkeeper?
 
