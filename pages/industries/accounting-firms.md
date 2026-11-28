@@ -1,11 +1,11 @@
 ---
-title: Hiring Bookkeepers for Accounting and CPA Firms | GetBookkeepers
+title: Bookkeepers for Atlanta CPA and Accounting Firms | GetBookkeepers
 description: What a CPA firm bookkeeper does: client write-up, payroll and sales tax for clients, busy season. Skills to screen for and how to cover peak months.
 h1: Hiring bookkeepers for accounting and CPA firms
 h1_accent: accounting and CPA firms
 lede: At a CPA firm, a bookkeeper keeps many clients' books at once, on deadlines set by tax season. Here is what the job really involves and how to hire for it.
 path: /industries/accounting-firms/
-kicker: Industry guide
+kicker: Atlanta industry guide
 crumb: Accounting firms
 kind: industry
 order: 1

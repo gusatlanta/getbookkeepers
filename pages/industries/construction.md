@@ -1,11 +1,11 @@
 ---
-title: Hiring Construction Bookkeepers: Job Costing Guide | GetBookkeepers
+title: Construction Bookkeepers in Atlanta: Job Costing | GetBookkeepers
 description: What a construction bookkeeper does: job costing, WIP schedules, retainage, pay applications, lien waivers, and certified payroll. What to screen for.
 h1: Hiring bookkeepers for construction companies
 h1_accent: construction companies
 lede: Construction bookkeeping is job-by-job. Every cost and every dollar billed has to land on the right job. Here is what a construction bookkeeper needs to know.
 path: /industries/construction/
-kicker: Industry guide
+kicker: Atlanta industry guide
 crumb: Construction
 kind: industry
 order: 5
@@ -34,7 +34,7 @@ A construction company's profit is earned one job at a time, over months, and bi
 
 ## Where these jobs are in metro Atlanta
 
-Staff Financial Group's Cumming page describes homebuilders, trade contractors, and property managers that need job costing, draw management, retainage tracking, and WIP schedules, often owner-led companies hiring their first in-house accounting person. Its Marietta page notes aerospace and defense suppliers near Dobbins that need job costing and contract compliance. See the [North Fulton and Forsyth](/atlanta/north-fulton-forsyth/) and [Cumberland and Marietta](/atlanta/cumberland-marietta/) area guides.
+Staff Financial Group's [Cumming page](/atlanta/cumming-ga/) describes homebuilders, trade contractors, and property managers that need job costing, draw management, retainage tracking, and WIP schedules, often owner-led companies hiring their first in-house accounting person. Its [Marietta page](/atlanta/marietta-ga/) notes aerospace and defense suppliers near Dobbins that need job costing and contract compliance. See the [North Fulton and Forsyth](/atlanta/north-fulton-forsyth/) and [Cumberland and Marietta](/atlanta/cumberland-marietta/) area guides.
 
 ## Skills to screen for
 
