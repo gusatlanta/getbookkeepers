@@ -1,11 +1,11 @@
 ---
-title: Hiring Your First Bookkeeper: Small Business Guide | GetBookkeepers
+title: Hire Your First Bookkeeper: Atlanta Small Business Guide | GetBookkeepers
 description: When a small business should hire its first in-house bookkeeper, what the job covers, how to work with your outside CPA, and which hire type fits.
 h1: Hiring your first bookkeeper for a small business
 h1_accent: first bookkeeper
 lede: Most small businesses start with the owner, a spouse, or an outside bookkeeper doing the books. Here is how to tell when it is time for your own hire, and what to look for.
 path: /industries/small-business/
-kicker: Industry guide
+kicker: Atlanta industry guide
 crumb: Small business
 kind: industry
 order: 2
@@ -38,7 +38,7 @@ In a small company, one bookkeeper usually does everything that a larger company
 - Closing the month and producing a profit and loss statement and balance sheet
 - Handing clean books to the outside CPA for taxes
 
-Staff Financial Group's local pages describe this pattern across metro Atlanta: Roswell restaurants, retailers, and service businesses that need an experienced bookkeeper rather than a full department, and owner-led companies around Cumming moving from an outside bookkeeper to an in-house accounting function for the first time. See the [North Fulton and Forsyth area guide](/atlanta/north-fulton-forsyth/).
+Staff Financial Group's local pages describe this pattern across metro Atlanta: [Roswell](/atlanta/roswell-ga/) restaurants, retailers, and service businesses that need an experienced bookkeeper rather than a full department, and owner-led companies around [Cumming](/atlanta/cumming-ga/) moving from an outside bookkeeper to an in-house accounting function for the first time. See the [North Fulton and Forsyth area guide](/atlanta/north-fulton-forsyth/).
 
 ## Working with your outside CPA
 
