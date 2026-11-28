@@ -38,6 +38,8 @@ ARTICLE_KINDS = {"role", "local", "area", "city", "industry", "salary"}
 ATLANTA, FAQ, ROLES_HUB, IND_HUB, SALARY, JOBS_PAGE = (
     "/atlanta/", "/faq/", "/roles/", "/industries/", "/bookkeeper-salary/", "/job-seekers/")
 DEFAULT_PROFILE_QUERIES = "bookkeeper|accounts payable|accounts receivable|payroll specialist|staff accountant"
+# Home ticker and carousel only. candidate-focus.js filters these results at display time.
+HOME_FOCUS_QUERIES = "bookkeeper|full charge bookkeeper|office manager|executive assistant|administrative assistant|admin assistant"
 # Copy rules (see the copy-and-page-rules-check skill). The build fails if rendered text breaks one.
 BANNED = [
     ("\u2014", "em dash"), ("\u2013", "en dash"), (r"\bpermanent\b", "say Direct Hire"),
@@ -323,7 +325,10 @@ def ticker_html(page: dict) -> str:
     Sits right under the header on the home page and the roles pages. Hidden until at least 3 profiles load."""
     if page["kind"] not in ("home", "role") and page["path"] != ROLES_HUB:
         return ""
-    return f"""    <section class="ticker" data-queries="{TICKER_QUERIES}" aria-label="Blinded bookkeeping and accounting profiles available in metro Atlanta" hidden>
+    home = page["kind"] == "home"
+    queries = html.escape(HOME_FOCUS_QUERIES if home else TICKER_QUERIES, quote=True)
+    focus = ' data-focus="bookkeepers"' if home else ""
+    return f"""    <section class="ticker" data-queries="{queries}"{focus} aria-label="Blinded bookkeeping and accounting profiles available in metro Atlanta" hidden>
       <div class="ticker-label"><a href="{TEMPS_URL}">Available now<span> in metro Atlanta</span></a></div>
       <div class="ticker-window"><div class="ticker-rail"></div></div>
     </section>"""
@@ -334,9 +339,11 @@ def profiles_html(page: dict) -> str:
     Hidden until at least 3 profiles load, so nothing shows if the feed is down."""
     if page["kind"] not in ("home", "role") and page["path"] != ROLES_HUB:
         return ""
-    queries = page.get("profiles", DEFAULT_PROFILE_QUERIES)
+    home = page["kind"] == "home"
+    queries = HOME_FOCUS_QUERIES if home else page.get("profiles", DEFAULT_PROFILE_QUERIES)
+    focus = ' data-focus="bookkeepers"' if home else ""
     heading = page.get("profiles_heading", "Bookkeeping and accounting candidates in our database")
-    return f"""    <section class="profiles" data-queries="{html.escape(queries)}" aria-labelledby="profiles-h" hidden>
+    return f"""    <section class="profiles" data-queries="{html.escape(queries, quote=True)}"{focus} aria-labelledby="profiles-h" hidden>
       <div class="wrap profiles-head">
         <div><h2 id="profiles-h">{html.escape(heading)}</h2>
         <p>Real, blinded profiles from Staff Financial Group's metro Atlanta candidate database. No names or contact details. Click a card to see the blinded resume.</p></div>
@@ -559,7 +566,11 @@ def build() -> int:
         content = (ticker_html(page) + "\n" + hero(page) + "\n" + profiles_html(page)
                    + f'\n    <div class="wrap content-grid"><article class="prose">{body_html}{faq_html(page["faqs"])}</article>{aside_html(page)}</div>\n'
                    + f'    <div class="wrap">{related_html(page, pages, by_path)}</div>\n' + cta_band(page))
-        scripts = '\n  <script src="/js/profiles.js" defer></script>' if profiles_html(page) else ""
+        scripts = ""
+        if page["kind"] == "home":
+            scripts += '\n  <script src="/js/candidate-focus.js" defer></script>'
+        if profiles_html(page):
+            scripts += '\n  <script src="/js/profiles.js" defer></script>'
         if ticker_html(page):
             scripts += '\n  <script src="/js/ticker.js" defer></script>'
         out = page_shell(page, content, schema_for(page, pages), pages, scripts)

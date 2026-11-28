@@ -2,7 +2,9 @@
    Source: the public candidate search feed that https://www.stafffinancial.com/temps.html uses
    (100xrecruiting.com/api/public/candidates/search, metro Atlanta). Profiles are blinded at the source:
    no names or contact details. Each card opens that candidate's blinded resume. Nothing is invented here;
-   if the feed fails or returns fewer than 3 profiles, the section stays hidden. */
+   if the feed fails or returns fewer than 3 profiles, the section stays hidden.
+   Home (data-focus="bookkeepers") applies the display filter in candidate-focus.js. Other pages
+   keep the role queries from their own data-queries attribute. */
 (function () {
   var API = 'https://100xrecruiting.com/api/public/candidates/search';
   var MAX = 14;
@@ -24,10 +26,14 @@
       return part.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
     }).join(', ');
   }
+  function focused() { return section.getAttribute('data-focus') === 'bookkeepers'; }
   function usable(c) {
     var t = cleanTitle(c.title);
-    return c.resume_url && /^https:\/\/100xrecruiting\.com\//.test(c.resume_url) && t && t.length <= 60 &&
+    var ok = c.resume_url && /^https:\/\/100xrecruiting\.com\//.test(c.resume_url) && t && t.length <= 60 &&
       !/\s(at|@)\s|@/i.test(t);
+    if (!ok) return false;
+    if (!focused()) return true;
+    return !!(window.gbFocus && window.gbFocus.passesTitle(c));
   }
   function card(c) {
     var chips = [];
@@ -43,30 +49,49 @@
       (chips.length ? '<span class="chips">' + chips.map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('') + '</span>' : '') +
       '<span class="profile-cta">View blinded resume &rarr;</span></a>';
   }
-  function get(q) {
-    var p = new URLSearchParams({ q: q, keywords: q, page: 1, metro: 'atlanta', af: '1' });
+  function one(q, page) {
+    var p = new URLSearchParams({ q: q, keywords: q, page: page, metro: 'atlanta', af: '1' });
     return fetch(API + '?' + p.toString()).then(function (r) { return r.ok ? r.json() : { results: [] }; })
-      .then(function (j) { if (j.warming) warming = true; return (j.results || []).filter(usable); })
-      .catch(function () { return []; });
+      .then(function (j) { if (j.warming) warming = true; return j; })
+      .catch(function () { return { results: [] }; });
+  }
+  function get(q) {
+    if (!focused()) return one(q, 1).then(function (j) { return (j.results || []).filter(usable); });
+    var acc = [];
+    function next(page) {
+      return one(q, page).then(function (j) {
+        acc = acc.concat((j.results || []).filter(usable));
+        var pages = Number(j.pages) || 1;
+        if (page >= pages || page >= 6 || acc.length >= 40) return acc;
+        return next(page + 1);
+      });
+    }
+    return next(1);
   }
   var warming = false, tries = 0;
   function load() {
   tries++;
+  var cap = focused() ? 40 : MAX;
   Promise.all(queries.map(get)).then(function (lists) {
     var seen = {}, out = [], i = 0, more = true;
-    while (out.length < MAX && more) {           /* round-robin across role queries */
+    while (out.length < cap && more) {           /* round-robin across role queries */
       more = false;
       lists.forEach(function (list) {
         var c = list[i];
-        if (c) { more = true; if (!seen[c.id] && out.length < MAX) { seen[c.id] = 1; out.push(c); } }
+        if (c) { more = true; if (!seen[c.id] && out.length < cap) { seen[c.id] = 1; out.push(c); } }
       });
       i++;
     }
-    if (out.length < 3) {               /* the feed answers "warming" while its cache fills; try again shortly */
+    var ready = focused() && window.gbFocus ? window.gbFocus.keep(out) : Promise.resolve(out);
+    ready.then(function (kept) {
+    if (section.dataset.gbReady) return;
+    var shown = (kept || []).slice(0, MAX);
+    if (shown.length < 3) {               /* the feed answers "warming" while its cache fills; try again shortly */
       if (warming && tries < 4) { warming = false; setTimeout(load, 5000); }
       return;
     }
-    track.innerHTML = out.map(card).join('');
+    section.dataset.gbReady = '1';
+    track.innerHTML = shown.map(card).join('');
     section.hidden = false;
     var step = function () { return Math.max(260, track.clientWidth * 0.8); };
     section.querySelectorAll('.pbtn').forEach(function (b) {
@@ -82,6 +107,7 @@
         track.scrollTo({ left: end ? 0 : track.scrollLeft + 280, behavior: 'smooth' });
       }, 3500);
     }
+    });
   });
   }
   load();
