@@ -185,9 +185,9 @@ def nav_html(page: dict, pages: list[dict]) -> str:
 
 
 def brand_html(extra: str = "") -> str:
-    return (f'<a class="brand{extra}" href="/" aria-label="GetBookkeepers home">'
+    return (f'<a class="brand{extra}" href="/" aria-label="GetBookkeepers.com home">'
             '<img src="/images/sfg-mark.png" alt="Staff Financial Group logo" width="38" height="45">'
-            '<span class="brand-text"><span class="brand-name">GetBookkeepers</span>'
+            '<span class="brand-text"><span class="brand-name">GetBookkeepers.com</span>'
             '<span class="brand-tag">Staff Financial Group &middot; Powered by NorthPoint</span></span></a>')
 
 
