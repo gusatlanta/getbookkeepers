@@ -262,6 +262,41 @@ def more_illustrations() -> dict[str, str]:
                    + label(142 + i * 100, 420 - int(v * 3.2), f"${v}K", NAVY, 18) + label(142 + i * 100, 462, n, "#5b6678", 14)
                    for i, (n, v) in enumerate(meds))
     a["salary"] = frame(bars + label(400, 70, "Typical ask, 2026 Salary Guide", NAVY, 24), "Median desired base salary by title from the 2026 Salary Guide")
+    a.update(city_and_industry_art())
+    return a
+
+
+def front(md: Path) -> dict:
+    return dict(re.findall(r"^(\w+):\s*(.+)$", md.read_text().split("---", 2)[1], re.M))
+
+
+def city_and_industry_art() -> dict[str, str]:
+    """One map per city page (the city pinned in green, its nearby cities in navy) and one card per new industry guide."""
+    a = {}
+    cities = {m["path"]: m for m in map(front, sorted((PAGES / "atlanta").glob("*.md"))) if m.get("kind") == "city"}
+    for m in cities.values():
+        x, y = map(int, m["pin"].split())
+        places = [(m["city"], x, y)]
+        spots = [(170, 150), (630, 150), (170, 400), (630, 400)]
+        for n, (nx, ny) in zip([p.strip() for p in m.get("nearby", "").split(",") if p.strip()], spots):
+            if n in cities:
+                places.append((cities[n]["city"], nx, ny))
+        a[Path(m["image"]).stem] = area_map(f"Map of {m['city']}, Georgia and nearby cities", places, m["county"])
+    for md in sorted((PAGES / "industries").glob("*.md")):
+        m = front(md)
+        if not m.get("art_tag"):
+            continue
+        rows = "".join(f'<rect x="150" y="{110+i*56}" width="500" height="42" rx="12" fill="#fff" stroke="{LINE}" stroke-width="2"/>'
+                       f'<rect x="175" y="{124+i*56}" width="{240-(i*53)%150}" height="14" rx="7" fill="{NAVY if i==0 else LINE}"/>'
+                       f'<circle cx="615" cy="{131+i*56}" r="10" fill="{GREEN if i%2==0 else GREEN_MID}"/>' for i in range(5))
+        a[Path(m["image"]).stem] = industry(m["image_alt"], rows + label(400, 90, m["crumb"], NAVY, 24), m["art_tag"])
+    n = len(list((PAGES / "industries").glob("*.md"))) - 1
+    a["industries"] = frame(
+        "".join(f'<rect x="{x}" y="{y}" width="170" height="90" rx="16" fill="#fff" stroke="{LINE}" stroke-width="2"/>' + label(x + 85, y + 54, t, NAVY, 18)
+                for x, y, t in ((120, 100, "CPA firms"), (315, 100, "Construction"), (510, 100, "Healthcare"),
+                                (120, 215, "Manufacturing"), (315, 215, "Real estate"), (510, 215, "Tech and SaaS"),
+                                (120, 330, "Nonprofit"), (315, 330, "Legal"), (510, 330, f"+{n - 8} more"))),
+        f"{n} industries with different bookkeeping needs")
     return a
 
 
