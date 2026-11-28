@@ -1,11 +1,11 @@
 ---
-title: Hiring Bookkeepers for Law Firms: Trust Accounting | GetBookkeepers
+title: Law Firm Bookkeepers in Atlanta: Trust Accounting | GetBookkeepers
 description: What a law firm bookkeeper does: client trust accounts, three-way reconciliation, client ledgers, and time-based billing. What to screen for.
 h1: Hiring bookkeepers for law firms
 h1_accent: law firms
 lede: The hardest part of law firm bookkeeping is money that does not belong to the firm. Here is what a legal bookkeeper must know about trust accounting and billing.
 path: /industries/legal/
-kicker: Industry guide
+kicker: Atlanta industry guide
 crumb: Legal
 kind: industry
 order: 4
@@ -35,7 +35,7 @@ Most firms bill by time. A legal bookkeeper often works with time entries, prepa
 
 ## Where these jobs are in metro Atlanta
 
-Staff Financial Group's Buckhead page notes that law and advisory firms there need partner-level billing and trust accounting, and that many Buckhead searches are confidential replacements. Midtown's law and consulting firms need engagement accounting and billing. See the [Buckhead, Midtown, and Sandy Springs area guide](/atlanta/buckhead-midtown-sandy-springs/).
+Staff Financial Group's [Buckhead page](/atlanta/buckhead-ga/) notes that law and advisory firms there need partner-level billing and trust accounting, and that many Buckhead searches are confidential replacements. Midtown's law and consulting firms need engagement accounting and billing. See the [Buckhead, Midtown, and Sandy Springs area guide](/atlanta/buckhead-midtown-sandy-springs/).
 
 ## Skills to screen for
 
