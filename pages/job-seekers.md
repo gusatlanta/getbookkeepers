@@ -14,6 +14,8 @@ date: 2026-11-22
 cta_url: https://100xjobs.com/
 cta_label: Search jobs on 100X Jobs
 cta_note: Bookkeeping, AP, AR, payroll, and accounting jobs near you.
+anchor: Bookkeeping jobs for job seekers
+h1_accent: bookkeeping job
 ---
 
 ## Search jobs on 100X Jobs
@@ -32,4 +34,6 @@ For short, practical interview advice, see [One Minute Interview Tips](https://w
 
 ## Know what the market pays
 
-Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html) shows what accounting people are asking to be paid. The median desired base salary was $70K for bookkeepers, $67K for AP, AR, and billing roles, and $70K for payroll and staff accountant roles, from 805 candidates between January and October 2026.
+<div class="salary-data" markdown="1">
+Staff Financial Group's [2026 Salary Guide](https://www.stafffinancial.com/salary-guide.html) shows what accounting people are asking to be paid. The median desired base salary was $70K for bookkeepers, $67K for AP, AR, and billing roles, and $70K for payroll and staff accountant roles, from 805 candidates between January and October 2026. See the [bookkeeper salary breakdown](/bookkeeper-salary/).
+</div>

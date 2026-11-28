@@ -1,6 +1,6 @@
 ---
 title: Payrolling for Bookkeepers | GetBookkeepers
-description: Already found your bookkeeper? Staff Financial Group payrolls them as Employer of Record: weekly payroll, tax withholdings, workers comp, W-2, one invoice.
+description: Found your bookkeeper? Staff Financial Group payrolls them as Employer of Record: weekly payroll, tax withholdings, workers comp, W-2, one invoice.
 h1: Payrolling for bookkeepers you already found
 lede: You picked the person. We become their Employer of Record, so they can start without you setting up payroll, workers comp, or year-end tax forms.
 path: /payrolling/
@@ -12,8 +12,10 @@ image: payrolling.svg
 image_alt: Pay stubs and W-2 forms handled by an employer of record
 og: Payrolling for bookkeepers you already found
 date: 2026-11-22
-related_heading: Other ways to hire a bookkeeper
-related: /temp-contract-bookkeepers/, /temp-to-hire-bookkeepers/, /direct-hire-bookkeepers/
+anchor: Payrolling a bookkeeper you already found
+roles: /roles/payroll-specialist/, /roles/accounts-payable-and-receivable-clerks/, /roles/full-charge-bookkeeper/
+order: 4
+h1_accent: you already found
 ---
 
 ## What payrolling means
@@ -27,7 +29,7 @@ Payrolling is for when you already have the bookkeeper. Maybe it is a former emp
 - **Workers comp and insurance.** Covered under Staff Financial Group's policy, not yours.
 - **W-2 reporting.** Issued at year-end.
 - **401(k) and benefits.** Every hire we payroll gets our 401(k) program, and benefits are available.
-- **One invoice.** You pay one invoice at your agreed bill rate.
+- **One invoice.** You get one invoice instead of another employee on your own payroll.
 
 ## When payrolling makes sense
 
@@ -40,14 +42,14 @@ Payrolling is for when you already have the bookkeeper. Maybe it is a former emp
 
 1. Choose "Contract / Interim" on the Get Started form and note in the message that you already have the person.
 2. Share the bookkeeper's name, pay rate, schedule, start date, and work location with your recruiter.
-3. We onboard them as our employee and agree on the bill rate with you.
+3. We onboard them as our employee and set up invoicing with you.
 4. They start; we payroll them every week.
 
 ## Frequently asked questions
 
 ### Can you payroll a bookkeeper I found myself?
 
-Yes. Staff Financial Group can act as Employer of Record for a worker you already chose, handling payroll, taxes, workers comp, and the W-2. You pay one invoice at your agreed bill rate.
+Yes. Staff Financial Group can act as Employer of Record for a worker you already chose, handling payroll, taxes, workers comp, and the W-2. You get one invoice.
 
 ### Can I hire a payrolled bookkeeper onto my own staff later?
 
