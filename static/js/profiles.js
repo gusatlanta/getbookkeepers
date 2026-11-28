@@ -46,9 +46,12 @@
   function get(q) {
     var p = new URLSearchParams({ q: q, keywords: q, page: 1, metro: 'atlanta', af: '1' });
     return fetch(API + '?' + p.toString()).then(function (r) { return r.ok ? r.json() : { results: [] }; })
-      .then(function (j) { return (j.results || []).filter(usable); })
+      .then(function (j) { if (j.warming) warming = true; return (j.results || []).filter(usable); })
       .catch(function () { return []; });
   }
+  var warming = false, tries = 0;
+  function load() {
+  tries++;
   Promise.all(queries.map(get)).then(function (lists) {
     var seen = {}, out = [], i = 0, more = true;
     while (out.length < MAX && more) {           /* round-robin across role queries */
@@ -59,7 +62,10 @@
       });
       i++;
     }
-    if (out.length < 3) return;
+    if (out.length < 3) {               /* the feed answers "warming" while its cache fills; try again shortly */
+      if (warming && tries < 4) { warming = false; setTimeout(load, 5000); }
+      return;
+    }
     track.innerHTML = out.map(card).join('');
     section.hidden = false;
     var step = function () { return Math.max(260, track.clientWidth * 0.8); };
@@ -77,4 +83,6 @@
       }, 3500);
     }
   });
+  }
+  load();
 })();
