@@ -20,9 +20,9 @@ PAGES = ROOT / "pages"
 
 NAVY = "#0b1f3d"
 NAVY_MID = "#12325a"
-GREEN = "#0e8a5f"
-GREEN_LT = "#e8f6ef"
-GREEN_MID = "#7fcfab"
+GREEN = "#1f86b9"
+GREEN_LT = "#eaf4f9"
+GREEN_MID = "#8ec8e6"
 TEAL = "#2a9cc0"
 PAPER = "#ffffff"
 LINE = "#d7e3ea"
@@ -41,12 +41,7 @@ def font(path: Path, size: int, weight: str) -> ImageFont.FreeTypeFont:
     return f
 
 
-MARK = (
-    '<rect x="0" y="0" width="64" height="64" rx="14" fill="{g}"/>'
-    '<rect x="14" y="16" width="36" height="5" rx="2.5" fill="#fff" opacity=".55"/>'
-    '<rect x="14" y="29" width="22" height="5" rx="2.5" fill="#fff" opacity=".55"/>'
-    '<path d="M30 44 l7 7 l14 -16" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>'
-).format(g=GREEN)
+SF_MARK_B64 = (IMG / "sfg-mark.png.b64").read_text().strip()  # Staff Financial Group mark, from stafffinancial.com/img/sfg-mark.png
 
 
 def write_svg(name: str, body: str, w: int, h: int) -> None:
@@ -56,28 +51,21 @@ def write_svg(name: str, body: str, w: int, h: int) -> None:
 
 
 def logo() -> None:
+    mark = f'<image href="data:image/png;base64,{SF_MARK_B64}" x="0" y="2" width="50" height="60"/>'
     body = (
-        f"<title>GetBookkeepers</title>{MARK}"
-        f'<text x="78" y="44" font-family="Outfit, Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="{NAVY}">Get<tspan fill="{GREEN}">Bookkeepers</tspan></text>'
+        f"<title>GetBookkeepers, a Staff Financial Group service</title>{mark}"
+        f'<text x="62" y="40" font-family="Outfit, Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="{NAVY}">GetBookkeepers</text>'
+        f'<text x="63" y="58" font-family="Inter, Arial, sans-serif" font-size="11" letter-spacing="1.5" fill="#5b6678">STAFF FINANCIAL GROUP</text>'
     )
     write_svg("logo.svg", body, 330, 64)
     (STATIC / "favicon.svg").write_text(
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">{MARK}</svg>\n'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><image href="data:image/png;base64,{SF_MARK_B64}" x="6" y="0" width="54" height="64"/></svg>\n'
     )
 
 
 def mark_png(size: int) -> Image.Image:
-    s = 8
-    im = Image.new("RGBA", (64 * s, 64 * s), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
-    d.rounded_rectangle([0, 0, 64 * s - 1, 64 * s - 1], radius=14 * s, fill=GREEN)
-    light = (255, 255, 255, 140)
-    d.rounded_rectangle([14 * s, 16 * s, 50 * s, 21 * s], radius=int(2.5 * s), fill=light)
-    d.rounded_rectangle([14 * s, 29 * s, 36 * s, 34 * s], radius=int(2.5 * s), fill=light)
-    d.line([(30 * s, 44 * s), (37 * s, 51 * s), (51 * s, 35 * s)], fill="white", width=6 * s, joint="curve")
-    for x, y in [(30, 44), (51, 35)]:
-        d.ellipse([(x - 3) * s, (y - 3) * s, (x + 3) * s, (y + 3) * s], fill="white")
-    return im.resize((size, size), Image.LANCZOS)
+    im = Image.open(io.BytesIO(base64.b64decode(SF_MARK_B64))).convert("RGBA")
+    return im.resize((int(size * im.width / im.height), size), Image.LANCZOS)
 
 
 def save_b64(im: Image.Image, dest: Path) -> None:
@@ -109,11 +97,10 @@ def og(dest: Path, headline: str, kicker: str) -> None:
         d.rounded_rectangle([780, y, 1120, y + 26], radius=8, fill=NAVY_MID)
         d.rounded_rectangle([780, y, 780 + 60 + (i * 37) % 200, y + 26], radius=8, fill=GREEN if i % 3 == 0 else "#1d4a7a")
     d.rectangle([0, H - 14, W, H], fill=GREEN)
-    m = mark_png(72)
-    im.paste(m, (80, 70), m)
-    d.text((168, 82), "Get", font=font(OUTFIT, 40, "Bold"), fill="white")
-    gx = 168 + d.textlength("Get", font=font(OUTFIT, 40, "Bold"))
-    d.text((gx, 82), "Bookkeepers", font=font(OUTFIT, 40, "Bold"), fill=GREEN_MID)
+    m = mark_png(76)
+    im.paste(m, (80, 66), m)
+    d.text((158, 70), "GetBookkeepers", font=font(OUTFIT, 40, "Bold"), fill="white")
+    d.text((160, 120), "STAFF FINANCIAL GROUP  |  POWERED BY NORTHPOINT", font=font(INTER, 16, "SemiBold"), fill=GREEN_MID)
     d.text((80, 200), kicker.upper(), font=font(INTER, 24, "SemiBold"), fill=GREEN_MID)
     hf = font(OUTFIT, 60, "Bold")
     y = 245
@@ -214,6 +201,67 @@ def illustrations() -> dict[str, str]:
               f'<text x="250" y="170" font-family="Inter, Arial" font-size="26" fill="{NAVY}">bookkeeper jobs near me</text>'
               + "".join(f'<rect x="150" y="{240+i*70}" width="500" height="54" rx="14" fill="{PAPER}" stroke="{LINE}" stroke-width="2"/><rect x="175" y="{258+i*70}" width="{220-i*40}" height="16" rx="8" fill="{NAVY if i==0 else LINE}"/><rect x="560" y="{252+i*70}" width="70" height="28" rx="14" fill="{GREEN}"/>' for i in range(3)))
     a["job-seekers"] = frame(search, "A job search box with bookkeeper job results")
+    a.update(more_illustrations())
+    return a
+
+
+def label(x, y, text, color=NAVY, size=20, anchor="middle") -> str:
+    return (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-family="Outfit, Inter, Arial, sans-serif" '
+            f'font-size="{size}" font-weight="700" fill="{color}">{text}</text>')
+
+
+def area_map(title: str, places: list[tuple[str, int, int]], road: str) -> str:
+    roads = (f'<path d="M80 470 C 260 330, 520 250, 730 60" stroke="{LINE}" stroke-width="22" fill="none" stroke-linecap="round"/>'
+             f'<path d="M60 160 C 300 240, 520 300, 760 440" stroke="{LINE}" stroke-width="14" fill="none" stroke-linecap="round"/>')
+    pins = "".join(
+        f'<path d="M{x} {y} c-20 0 -32 -14 -32 -30 a32 32 0 0 1 64 0 c0 16 -12 30 -32 30 z" fill="{GREEN if i == 0 else NAVY}"/>'
+        f'<circle cx="{x}" cy="{y-30}" r="11" fill="#fff"/>'
+        f'<rect x="{x-78}" y="{y+8}" width="156" height="34" rx="17" fill="#fff" stroke="{LINE}" stroke-width="2"/>'
+        + label(x, y + 31, name, NAVY, 17)
+        for i, (name, x, y) in enumerate(places))
+    tag = f'<rect x="40" y="36" width="{24 + 12 * len(road)}" height="40" rx="20" fill="{NAVY}"/>' + label(52, 63, road, "#fff", 18, "start")
+    return frame(roads + pins + tag, title)
+
+
+def industry(title: str, motif: str, tag: str) -> str:
+    return frame(motif + badge(400, 455, tag, NAVY).replace('x="320"', 'x="300"').replace('width="160"', 'width="200"'), title)
+
+
+def more_illustrations() -> dict[str, str]:
+    a = {}
+    a["area-north-fulton"] = area_map("Map of North Fulton and Forsyth: Alpharetta, Roswell, Johns Creek, Cumming",
+                                      [("Alpharetta", 400, 250), ("Roswell", 230, 360), ("Johns Creek", 590, 330), ("Cumming", 520, 140)], "GA-400")
+    a["area-gwinnett"] = area_map("Map of Gwinnett along I-85: Norcross, Duluth, Peachtree Corners",
+                                  [("Norcross", 300, 330), ("Duluth", 520, 230), ("Peachtree Corners", 330, 170)], "I-85")
+    a["area-central"] = area_map("Map of central Atlanta and Perimeter: Midtown, Buckhead, Sandy Springs",
+                                 [("Midtown", 330, 400), ("Buckhead", 420, 270), ("Sandy Springs", 540, 140)], "MARTA Red Line")
+    a["area-cobb"] = area_map("Map of Cobb along I-75: Cumberland, Marietta, Smyrna",
+                              [("Cumberland", 420, 330), ("Marietta", 300, 170), ("Smyrna", 590, 250)], "I-75 / I-285")
+    a["industries"] = frame(
+        "".join(f'<rect x="{x}" y="{y}" width="170" height="120" rx="18" fill="#fff" stroke="{LINE}" stroke-width="2"/>' + label(x + 85, y + 70, t, NAVY, 20)
+                for x, y, t in ((120, 110, "CPA firms"), (315, 110, "Construction"), (510, 110, "Healthcare"), (215, 270, "Legal"), (410, 270, "Small business"))),
+        "Five industries with different bookkeeping needs")
+    cols = "".join(f'<rect x="{150+i*110}" y="{170}" width="90" height="230" rx="10" fill="#fff" stroke="{LINE}" stroke-width="2"/>'
+                   f'<rect x="{165+i*110}" y="{200+((i*37)%90)}" width="60" height="{180-((i*37)%90)}" rx="6" fill="{GREEN if i%2==0 else GREEN_MID}"/>' for i in range(5))
+    a["ind-construction"] = industry("Job cost columns and a work in progress schedule", cols + label(400, 140, "WIP schedule", NAVY, 26), "Job costing")
+    trust = (f'<rect x="150" y="110" width="220" height="280" rx="18" fill="#fff" stroke="{LINE}" stroke-width="2"/>' + label(260, 160, "Bank", NAVY, 24)
+             + f'<rect x="430" y="110" width="220" height="280" rx="18" fill="#fff" stroke="{LINE}" stroke-width="2"/>' + label(540, 160, "Client ledgers", NAVY, 24)
+             + f'<path d="M300 420 L400 330 L500 420" fill="none" stroke="{GREEN}" stroke-width="6" stroke-linecap="round"/>'
+             + "".join(f'<rect x="{x}" y="{200+i*40}" width="160" height="14" rx="7" fill="{LINE}"/>' for i in range(4) for x in (180, 460)))
+    a["ind-legal"] = industry("A three-way trust reconciliation: bank, trust journal, client ledgers", trust, "Trust accounting")
+    claims = "".join(f'<rect x="150" y="{110+i*62}" width="500" height="48" rx="12" fill="#fff" stroke="{LINE}" stroke-width="2"/>'
+                     f'<rect x="175" y="{126+i*62}" width="{200-i*25}" height="16" rx="8" fill="{LINE}"/>'
+                     f'<rect x="520" y="{122+i*62}" width="100" height="24" rx="12" fill="{GREEN if i<2 else NAVY}"/>' for i in range(5))
+    a["ind-healthcare"] = industry("Insurance claims and patient balances being posted", claims, "Patient AR")
+    files = "".join(f'<rect x="{150+i*40}" y="{120+i*30}" width="300" height="200" rx="16" fill="#fff" stroke="{LINE}" stroke-width="2"/>'
+                    f'<rect x="{170+i*40}" y="{140+i*30}" width="120" height="14" rx="7" fill="{NAVY if i==3 else LINE}"/>' for i in range(4))
+    a["ind-accounting-firms"] = industry("A stack of client files at an accounting firm", files, "Client books")
+    a["ind-small-business"] = industry("A small business ledger and a storefront", ledger(150, 90, 6, (0, 2, 4)), "First hire")
+    meds = [("Bookkeeper", 70), ("AP / AR", 67), ("Payroll", 70), ("Staff Acct", 70), ("Acct Spec", 75), ("Senior Acct", 95)]
+    bars = "".join(f'<rect x="{110+i*100}" y="{430-int(v*3.2)}" width="64" height="{int(v*3.2)}" rx="8" fill="{GREEN if i==0 else NAVY}"/>'
+                   + label(142 + i * 100, 420 - int(v * 3.2), f"${v}K", NAVY, 18) + label(142 + i * 100, 462, n, "#5b6678", 14)
+                   for i, (n, v) in enumerate(meds))
+    a["salary"] = frame(bars + label(400, 70, "Typical ask, 2026 Salary Guide", NAVY, 24), "Median desired base salary by title from the 2026 Salary Guide")
     return a
 
 
@@ -226,9 +274,7 @@ def h1_of(md: Path) -> tuple[str, str, str]:
 def main() -> None:
     IMG.mkdir(parents=True, exist_ok=True)
     logo()
-    save_b64(mark_png(32), STATIC / "favicon.png.b64")
-    save_b64(mark_png(180), STATIC / "apple-touch-icon.png.b64")
-    save_b64(mark_png(512), IMG / "logo-mark-512.png.b64")
+    # favicon.png, apple-touch-icon.png and logo-mark-512.png are Staff Financial Group's own favicon files.
     for name, body in illustrations().items():
         write_svg(f"{name}.svg", body, 800, 520)
     og(IMG / "og-default.png.b64", "Hire a bookkeeper who fits your books", "Temp, Contract, Temp-to-Hire, Direct Hire, Payrolling")
