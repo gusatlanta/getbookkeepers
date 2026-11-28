@@ -1,5 +1,5 @@
 ---
-title: Hire a Full-Charge Bookkeeper | GetBookkeepers
+title: Hire a Full-Charge Bookkeeper in Atlanta | GetBookkeepers
 description: Hire a full-charge bookkeeper who runs your books end to end through the monthly close: what full-charge means, skills to screen for, and questions.
 h1: Hire a full-charge bookkeeper
 lede: A full-charge bookkeeper owns the books from the first transaction to the closed month. For many small and midsize companies, it is the most important finance hire they make.

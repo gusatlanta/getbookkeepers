@@ -1,5 +1,5 @@
 ---
-title: Payrolling for Bookkeepers | GetBookkeepers
+title: Payrolling for Bookkeepers in Atlanta | GetBookkeepers
 description: Found your bookkeeper? Staff Financial Group payrolls them as Employer of Record: weekly payroll, tax withholdings, workers comp, W-2, one invoice.
 h1: Payrolling for bookkeepers you already found
 lede: You picked the person. We become their Employer of Record, so they can start without you setting up payroll, workers comp, or year-end tax forms.

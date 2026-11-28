@@ -1,5 +1,5 @@
 ---
-title: Hire an AP or AR Clerk | GetBookkeepers
+title: Hire an AP or AR Clerk in Atlanta | GetBookkeepers
 description: Hire an accounts payable or receivable clerk: what AP and AR clerks own, the skills to screen for, interview questions, and which hire type fits.
 h1: Hire an accounts payable or accounts receivable clerk
 lede: AP and AR clerks keep cash moving in both directions. The right one pays vendors on time without paying anything twice, and gets customers to pay you faster.
