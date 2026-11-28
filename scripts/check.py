@@ -114,6 +114,11 @@ def site_checks() -> list[str]:
         if kinds[path] in ("home", "role") or path == "/roles/":
             if 'class="ticker"' not in text or "/js/ticker.js" not in text:
                 errors.append(f"{path}: missing the scrolling profile strip")
+        if path == "/":
+            if text.count('data-focus="bookkeepers"') != 2 or "/js/candidate-focus.js" not in text:
+                errors.append(f"{path}: home ticker and profile cards must use the bookkeeper display filter")
+        elif 'data-focus="bookkeepers"' in text:
+            errors.append(f"{path}: bookkeeper display filter is only for the home page")
         if kinds[path] == "page":
             ctas = re.findall(r'<a[^>]*data-cta="[^"]*"[^>]*>', text)
             targets = {re.search(r'href="([^"]+)"', c).group(1) for c in ctas}
